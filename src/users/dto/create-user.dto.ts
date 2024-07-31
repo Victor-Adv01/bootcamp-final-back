@@ -1,4 +1,4 @@
-import { IsBoolean, IsEmail, IsString } from "class-validator";
+import { IsBoolean, IsEmail, IsString, IsUUID } from "class-validator";
 
 
 export class CreateUserDto {
@@ -18,9 +18,11 @@ export class CreateUserDto {
     @IsBoolean()
     isBanned: boolean;
 
+
     //faltan
-    //role: <Role>(admin/user)
-    //reviews: <Review>
+    // @IsUUID()
+    //role: Role; //(admin/user)
+
 
 
 

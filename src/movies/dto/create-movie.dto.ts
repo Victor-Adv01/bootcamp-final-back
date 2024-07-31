@@ -16,15 +16,10 @@ export class CreateMovieDto {
     @IsNumber()
     duration: number;
 
-    @IsNumber()
-    avg_rating: number;
-
-    @IsString()
-    genre: string;
-
     @IsString()
     synopsis: string;
 
-    //reviews: Review
+    // @IsUUID()
+    // genre: Genre;
    
 }

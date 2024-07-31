@@ -1,5 +1,6 @@
 import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Review } from '../../reviews/entities/review.entity';
+import { Comment } from "src/comments/entities/comment.entity";
 
 @Entity('user')
 export class User {
@@ -23,10 +24,13 @@ export class User {
     isBanned: boolean;
 
     //relaciones con rol y review
-   
-    
-    @OneToMany(() => Review, review => review.user)
+
+
+    @OneToMany(() => Review, (review) => review.user)
     reviews: Review[];
+
+    @OneToMany(() => Comment, (comment) => comment.user)
+    comments: Comment[];
 
 
 
