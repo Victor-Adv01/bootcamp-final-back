@@ -1,7 +1,8 @@
 import { Review } from "src/reviews/entities/review.entity";
 import { User } from "src/users/entities/user.entity";
-import { Column, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
+@Entity('comment')
 export class Comment {
     
     @PrimaryGeneratedColumn('uuid')
