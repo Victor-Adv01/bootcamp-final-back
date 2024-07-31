@@ -6,7 +6,7 @@ export class Genre {
 @PrimaryGeneratedColumn('uuid')
 id: string;
 
-@Column('name')
+@Column('text')
 name: string;
 
 @OneToMany(() => Movie, movie => movie.genre)

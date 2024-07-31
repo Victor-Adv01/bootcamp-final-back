@@ -33,8 +33,10 @@ export class User {
     @OneToMany(() => Comment, (comment) => comment.user)
     comments: Comment[];
 
-    @OneToMany(() => Role, role => role.users)
-    role: Role
+    // @OneToMany(() => Role, role => role.users)
+    // role: Role;
+    @ManyToOne(() => Role, role => role.users)
+    role: Role;
 
 
 }
