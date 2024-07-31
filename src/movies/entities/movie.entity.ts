@@ -1,3 +1,4 @@
+import { Genre } from "src/genres/entities/genre.entity";
 import { Review } from "src/reviews/entities/review.entity";
 import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
@@ -33,6 +34,6 @@ export class Movie {
     reviews: Review[];
 
     //TODO: falta relacion N:1
-    // @ManyToOne(() => Genre, (gen) => gen.movie)
-    //genre: Genre;
+    @ManyToOne(() => Genre, (gen) => gen.movie)
+    genre: Genre;
 }

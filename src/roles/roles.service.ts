@@ -18,8 +18,8 @@ export class RolesService {
   }
 
   findAll() {
-    return this.rolesRepository.find()
-    // return this.rolesRepository.find({relations: {user: true}})
+  
+    return this.rolesRepository.find({relations: {users: true}})
   }
 
   // findOne(id: number) {
