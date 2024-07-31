@@ -5,9 +5,11 @@ import { MoviesModule } from './movies/movies.module';
 import { UsersModule } from './users/users.module';
 import { ReviewsModule } from './reviews/reviews.module';
 import { CommentsModule } from './comments/comments.module';
+import { RolesModule } from './roles/roles.module';
+import { GenresModule } from './genres/genres.module';
 
 @Module({
-  imports: [TypeOrmModule.forRoot(typeORM()), MoviesModule, UsersModule, ReviewsModule, CommentsModule],
+  imports: [TypeOrmModule.forRoot(typeORM()), MoviesModule, UsersModule, ReviewsModule, CommentsModule, RolesModule, GenresModule],
   controllers: [],
   providers: [],
 })
