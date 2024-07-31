@@ -8,9 +8,10 @@ import { CommentsModule } from './comments/comments.module';
 import { RolesModule } from './roles/roles.module';
 import { GenresModule } from './genres/genres.module';
 import { SignupModule } from './signup/signup.module';
+import { LoginModule } from './login/login.module';
 
 @Module({
-  imports: [TypeOrmModule.forRoot(typeORM()), MoviesModule, UsersModule, ReviewsModule, CommentsModule, RolesModule, GenresModule, SignupModule],
+  imports: [TypeOrmModule.forRoot(typeORM()), MoviesModule, UsersModule, ReviewsModule, CommentsModule, RolesModule, GenresModule, SignupModule, LoginModule],
   controllers: [],
   providers: [],
 })

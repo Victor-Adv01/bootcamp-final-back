@@ -20,7 +20,7 @@ export class UsersService {
   async findAll() {
     const data = await this.userRepository.find({
       order: { lastName: 'ASC'},
-      //relations: {reviews: true}
+      relations: {reviews: true, role: true, comments: true}
     })
     return data;
   }
