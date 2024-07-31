@@ -1,4 +1,6 @@
-import { Column, PrimaryGeneratedColumn } from "typeorm";
+import { Review } from "src/reviews/entities/review.entity";
+import { User } from "src/users/entities/user.entity";
+import { Column, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 export class Comment {
     
@@ -9,8 +11,10 @@ export class Comment {
     content: string;
     
     // una vez seteado puede ser opcion:
-    // @ManyToOne(() => Review, review => review.comments)
-    // review: Review;
+    @ManyToOne(() => Review, review => review.comments)
+    review: Review;
 
     //faltaria users N a 1
+    @ManyToOne(()=> User, user => user.comments)
+    user: User;
 }

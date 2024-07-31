@@ -19,12 +19,9 @@ export class CreateMovieDto {
     @IsNumber()
     avg_rating: number;
 
-    @IsString()
-    genre: string;
 
     @IsString()
     synopsis: string;
 
-    //reviews: Review
    
 }

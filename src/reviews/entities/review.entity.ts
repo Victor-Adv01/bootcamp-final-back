@@ -1,7 +1,8 @@
 import { IsString } from "class-validator";
+import { Comment } from "src/comments/entities/comment.entity";
 import { Movie } from "src/movies/entities/movie.entity";
 import { User } from "src/users/entities/user.entity";
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 
 @Entity('review')
@@ -24,7 +25,7 @@ export class Review {
     @ManyToOne(()=> User, user => user.reviews)
     user: User;
   
-    // @OneToMany(() => Comment, comment => comment.review)
-    // comments: Comment[];
+    @OneToMany(() => Comment, comment => comment.review)
+    comments: Comment[];
     
 }

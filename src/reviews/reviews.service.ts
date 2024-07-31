@@ -20,7 +20,7 @@ export class ReviewsService {
   async findAll() {
     const data = await this.reviewRepository.find({
       order: { rating: 'DESC'},
-      relations: { movie: true }
+      relations: { movie: true, user: true, comments: true }
       //relations: { movies: true, users: tue},
       
     })

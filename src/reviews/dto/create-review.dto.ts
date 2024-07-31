@@ -1,4 +1,6 @@
-import { IsNumber, IsString } from "class-validator";
+import { IsNumber, IsString, IsUUID } from "class-validator";
+import { Movie } from "src/movies/entities/movie.entity";
+import { User } from "src/users/entities/user.entity";
 
 
 export class CreateReviewDto {
@@ -9,9 +11,11 @@ export class CreateReviewDto {
     @IsNumber()
     rating: number;
 
-    //aqui faltaria
-    //user: <User>;
-    //movie: <Movie>;
 
-    //?agregaría relacion con Comentarios? comments: <Comment> algo asi
+    @IsUUID()
+    user: User;
+
+    @IsUUID()
+    movie: Movie;
+
 }

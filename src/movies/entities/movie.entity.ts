@@ -1,5 +1,5 @@
 import { Review } from "src/reviews/entities/review.entity";
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 
 @Entity('movie')
@@ -22,17 +22,17 @@ export class Movie {
     @Column('float')
     avg_rating: number;
 
-    @Column('text')
-    genre: string;
 
     @Column('text')
     synopsis: string;
 
-    //relacion con review
-    // @OneToMany(() => Review, (review) => review)
-    // reviews: Review[];
+
 
     //otra forma, quizas mas clara agregando atributo movie:
     @OneToMany(() => Review, review => review.movie)
     reviews: Review[];
+
+    //TODO: falta relacion N:1
+    // @ManyToOne(() => Genre, (gen) => gen.movie)
+    //genre: Genre;
 }
