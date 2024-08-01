@@ -33,7 +33,7 @@ export class MoviesService {
       img: movie.img,
       year: movie.year,
       duration: movie.duration,
-      avg_rating: movie.avg_rating,
+      // avg_rating: movie.avg_rating,
       synopsis: movie.synopsis,
       genre: movie.genre.name,
       reviews: movie.reviews.map(review => (
@@ -65,7 +65,7 @@ export class MoviesService {
       img: movie.img,
       year: movie.year,
       duration: movie.duration,
-      avg_rating: movie.avg_rating,
+      // avg_rating: movie.avg_rating,
       synopsis: movie.synopsis,
       genre: movie.genre.name,
       reviews: movie.reviews.map(review => (
@@ -73,7 +73,7 @@ export class MoviesService {
           id: review.id,
           description: review.description,
           rating: review.rating,
-          //movie: review.movie,
+          movie: review.movie,
           user: review.user.name,
           comments: review.comments.map(comment => ({
             id: comment.id,
