@@ -23,7 +23,7 @@ export class MoviesService {
   async findAll() {
     const data = await this.movieRepository.find({
       order: { year: 'DESC'},
-      relations: { reviews: true },
+      relations: ['reviews', 'reviews.user', 'genre', 'reviews.comments']
       //relations: { reviews: true }
     })
     return data;
@@ -32,6 +32,7 @@ export class MoviesService {
   async findOne(id: string) {
     const movie = await this.movieRepository.findOne({
       where: { id: id },
+      relations: ['reviews', 'reviews.user', 'genre', 'reviews.comments', 'reviews.comments.user']
     });
     if (!movie) throw new BadRequestException(`The movie ${id} doesn't exist.`)
       return movie

@@ -25,7 +25,7 @@ export class Review {
     @ManyToOne(()=> User, user => user.reviews)
     user: User;
   
-    @OneToMany(() => Comment, comment => comment.review)
+    @OneToMany(() => Comment, comment => comment.review, { cascade: true, onDelete: 'CASCADE' })
     comments: Comment[];
     
 }

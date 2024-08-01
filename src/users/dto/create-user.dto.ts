@@ -1,4 +1,5 @@
 import { IsBoolean, IsEmail, IsString, IsUUID } from "class-validator";
+import { Role } from "src/roles/entities/role.entity";
 
 
 export class CreateUserDto {
@@ -20,8 +21,8 @@ export class CreateUserDto {
 
 
     //faltan
-    // @IsUUID()
-    //role: Role; //(admin/user)
+    @IsUUID()
+    role: Role; //(admin/user)
 
 
 
