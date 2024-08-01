@@ -6,7 +6,7 @@ export const typeORM = (): TypeOrmModuleOptions => {
     host: 'localhost',
     port: 5432,
     username: 'postgres',
-    password: '1234',//cambiar dependiendo la pass de tu sql
+    password: 'admin1234',//cambiar dependiendo la pass de tu sql
     database: 'final',//cambiar dependiendo el nombre de tu tabla en tu sql
     entities: ['dist/**/*.entity.{ts,js}'],
     synchronize: true,
