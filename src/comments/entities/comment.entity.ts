@@ -12,7 +12,7 @@ export class Comment {
     content: string;
     
     // una vez seteado puede ser opcion:
-    @ManyToOne(() => Review, review => review.comments)
+    @ManyToOne(() => Review, review => review.comments,  { onDelete: 'CASCADE' })
     review: Review;
 
     //faltaria users N a 1

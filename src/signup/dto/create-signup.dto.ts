@@ -1,8 +1,8 @@
-import { IsBoolean, IsEmail, IsString, IsUUID } from "class-validator";
+import { IsBoolean, IsEmail, IsString, IsUUID} from "class-validator";
 import { Role } from "src/roles/entities/role.entity";
 
+export class CreateSignupDto {
 
-export class CreateUserDto {
 
     @IsString()
     name: string;
@@ -16,15 +16,10 @@ export class CreateUserDto {
     @IsString()
     password: string;
 
-    @IsBoolean()
-    isBanned: boolean;
+    // @IsUUID()
+    // role: Role;
 
-
-    //faltan
-    @IsUUID()
-    role: Role; //(admin/user)
-
-
-
-
+    // @IsBoolean()
+    // isBanned: boolean;
+    
 }

@@ -5,6 +5,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Movie } from './entities/movie.entity';
 import { Repository } from 'typeorm';
 import { Review } from 'src/reviews/entities/review.entity';
+import { title } from 'process';
 
 @Injectable()
 export class MoviesService {
@@ -23,19 +24,67 @@ export class MoviesService {
   async findAll() {
     const data = await this.movieRepository.find({
       order: { year: 'DESC'},
-      relations: { reviews: true },
+      relations: ['reviews', 'reviews.user', 'genre', 'reviews.comments', 'reviews.comments.user']
       //relations: { reviews: true }
     })
-    return data;
+    return data.map(movie => ({
+      id: movie.id, 
+      title: movie.title,
+      img: movie.img,
+      year: movie.year,
+      duration: movie.duration,
+      avg_rating: movie.avg_rating,
+      synopsis: movie.synopsis,
+      genre: movie.genre.name,
+      reviews: movie.reviews.map(review => (
+        {
+          id: review.id,
+          description: review.description,
+          rating: review.rating,
+          //movie: review.movie,
+          user: review.user.name,
+          comments: review.comments.map(comment => ({
+            id: comment.id,
+            content: comment.content,
+            user: comment.user.name
+          }))
+        }
+      ))
+     }));
   }
 
   async findOne(id: string) {
     const movie = await this.movieRepository.findOne({
       where: { id: id },
+      relations: ['reviews', 'reviews.user', 'genre', 'reviews.comments', 'reviews.comments.user']
     });
     if (!movie) throw new BadRequestException(`The movie ${id} doesn't exist.`)
-      return movie
-  }
+      return {
+        id: movie.id, 
+      title: movie.title,
+      img: movie.img,
+      year: movie.year,
+      duration: movie.duration,
+      avg_rating: movie.avg_rating,
+      synopsis: movie.synopsis,
+      genre: movie.genre.name,
+      reviews: movie.reviews.map(review => (
+        {
+          id: review.id,
+          description: review.description,
+          rating: review.rating,
+          //movie: review.movie,
+          user: review.user.name,
+          comments: review.comments.map(comment => ({
+            id: comment.id,
+            content: comment.content,
+            user: comment.user.name
+          }))
+        }
+      ))
+     };
+    }
+  
 
   async update(id: string, updateMovieDto: UpdateMovieDto) {
     const movie = await this.movieRepository.findOne({
