@@ -4,6 +4,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
 import { Repository } from 'typeorm';
+const crypto = require('crypto')
 
 @Injectable()
 export class UsersService {
@@ -14,7 +15,10 @@ export class UsersService {
 
 
   async create(createUserDto: CreateUserDto) {
-    return await this.userRepository.save(createUserDto);
+    const { email, password, name, lastName, isBanned, role} = createUserDto;
+    const hashPass = crypto.createHash('sha256').update(password).digest('hex');
+
+    return await this.userRepository.save({email, name, lastName, password: hashPass, isBanned, role});
   }
 
   async findAll() {
@@ -28,10 +32,10 @@ export class UsersService {
   async findOne(id: string) {
     const user = await this.userRepository.findOne({
       where: { id: id },
-      // relations: {role: true, reviews: true, comments: true}
+      relations: {role: true, reviews: true, comments: true}
     });
     if (!user) throw new BadRequestException(`The user ${id} doesn't exist.`)
-    return user
+    return { user: {id: user.id, email: user.email, name: user.name, lastName: user.lastName, reviews: user.reviews}}
   }
 
   async update(id: string, updateUserDto: UpdateUserDto) {

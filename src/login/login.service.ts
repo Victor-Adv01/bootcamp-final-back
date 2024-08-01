@@ -27,9 +27,10 @@ export class LoginService {
     })
 
     if(!user) throw new UnauthorizedException('Incorrect credentials');
+    if(user.isBanned) throw new UnauthorizedException('You have been banned.')
     const token = this.jwtService.sign({ user: {id: user.id, role: user.role.name}}, {expiresIn: 1000000, secret: 'secretkey'});
     
-    return { token };
+    return { user: {id: user.id, role: user.role.name}, token };
   }
 
 }
