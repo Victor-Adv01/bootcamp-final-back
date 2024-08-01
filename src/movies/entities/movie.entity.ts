@@ -20,10 +20,6 @@ export class Movie {
     @Column('int')
     duration: number;
 
-    @Column('float')
-    avg_rating: number;
-
-
     @Column('text')
     synopsis: string;
 
