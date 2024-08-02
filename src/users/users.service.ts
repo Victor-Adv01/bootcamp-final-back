@@ -24,7 +24,7 @@ export class UsersService {
   async findAll() {
     const data = await this.userRepository.find({
       order: { lastName: 'ASC'},
-      relations: {reviews: true, role: true, comments: true}
+      relations: ['role', 'reviews', 'comments', 'reviews.movie']
     })
     return data;
   }
@@ -44,7 +44,8 @@ export class UsersService {
       // relations: {role: true, reviews: true, comments: true}
     });
     if (!user) throw new BadRequestException(`The user ${id} doesn't exist.`)
-    return await this.userRepository.update({ id: id }, updateUserDto);
+     await this.userRepository.update({ id: id }, updateUserDto);
+    return await this.findAll()
   }
 
   async remove(id: string) {
