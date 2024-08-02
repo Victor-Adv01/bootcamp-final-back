@@ -32,7 +32,7 @@ export class UsersService {
   async findOne(id: string) {
     const user = await this.userRepository.findOne({
       where: { id: id },
-      relations: {role: true, reviews: true, comments: true}
+      relations: ['role', 'reviews', 'comments', 'reviews.movie']
     });
     if (!user) throw new BadRequestException(`The user ${id} doesn't exist.`)
     return { user: {id: user.id, email: user.email, name: user.name, lastName: user.lastName, reviews: user.reviews}}

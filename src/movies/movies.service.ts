@@ -46,7 +46,7 @@ export class MoviesService {
           comments: review.comments.map(comment => ({
             id: comment.id,
             content: comment.content,
-            user: comment.user.name
+          
           }))
         }
       ))
