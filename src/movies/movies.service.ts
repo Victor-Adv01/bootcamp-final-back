@@ -24,7 +24,7 @@ export class MoviesService {
   async findAll() {
     const data = await this.movieRepository.find({
       order: { year: 'DESC'},
-      relations: ['reviews', 'reviews.user', 'genre', 'reviews.comments']
+      relations: ['reviews', 'reviews.user', 'genre', 'reviews.comments', 'reviews.comments.user']
       //relations: { reviews: true }
     })
     return data.map(movie => ({
@@ -46,7 +46,7 @@ export class MoviesService {
           comments: review.comments.map(comment => ({
             id: comment.id,
             content: comment.content,
-          
+            user: comment.user.name
           }))
         }
       ))

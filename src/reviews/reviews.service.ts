@@ -4,17 +4,23 @@ import { UpdateReviewDto } from './dto/update-review.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Review } from './entities/review.entity';
 import { Repository } from 'typeorm';
+import { MoviesService } from 'src/movies/movies.service';
+import { UsersService } from 'src/users/users.service';
 
 @Injectable()
 export class ReviewsService {
   constructor(
+    private readonly usersService: UsersService,
+    private readonly moviesService: MoviesService,
     @InjectRepository(Review)
     private readonly reviewRepository: Repository<Review>,
   ){}
 
 
   async create(createReviewDto: CreateReviewDto) {
-    return await this.reviewRepository.save(createReviewDto);
+     await this.reviewRepository.save(createReviewDto);
+    const movies = await this.moviesService.findAll()
+    return movies
   }
 
   async findAll() {
@@ -40,7 +46,9 @@ export class ReviewsService {
       where: { id: id },
     });
     if (!review) throw new BadRequestException(`The review ${id} doesn't exist.`)
-    return await this.reviewRepository.update({ id: id }, updateReviewDto);
+     await this.reviewRepository.update({ id: id }, updateReviewDto);
+    const users = this.usersService.findAll()
+    return users
   }
 
   async remove(id: string) {
@@ -49,5 +57,7 @@ export class ReviewsService {
     });
     if (!review) throw new BadRequestException(`The review ${id} doesn't exist.`)
      await this.reviewRepository.delete({ id: id});
+    const users = this.usersService.findAll()
+    return users
   }
 }

@@ -4,17 +4,21 @@ import { UpdateCommentDto } from './dto/update-comment.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Comment } from './entities/comment.entity';
+import { MoviesService } from 'src/movies/movies.service';
 
 @Injectable()
 export class CommentsService {
 
 constructor(
+  private readonly moviesService: MoviesService,
   @InjectRepository(Comment)
   private readonly commentsRepository: Repository<Comment>
 ){}
 
-  create(createCommentDto: CreateCommentDto) {
-    return this.commentsRepository.save(createCommentDto)
+  async create(createCommentDto: CreateCommentDto) {
+    await this.commentsRepository.save(createCommentDto)
+    const movies = await this.moviesService.findAll()
+    return movies
   }
 
   findAll() {
